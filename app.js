@@ -2,9 +2,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const playerRoutes = require('./routes/playerRoutes');
+const viewRoutes = require('./routes/viewRoutes');
 const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
+
+app.set('view engine', 'pug');
 
 // Middleware
 
@@ -21,7 +24,15 @@ app.use((req, res, next) => {
   next();
 });
 
-// Mount our player router
+// Test pug templating
+// app.get('/', (req, res) => {
+//   res.status(200).render('navbar-static', {
+//     num: [5, 3, 4, 2],
+//   });
+// });
+
+// Mount our routers
+app.use('/', viewRoutes);
 app.use('/api/v1/players', playerRoutes);
 
 // Use global error handling middleware
