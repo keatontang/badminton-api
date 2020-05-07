@@ -7,6 +7,11 @@ const playerSchema = new mongoose.Schema({
     trim: true,
     unique: [true, 'A player must have a unique name'],
   },
+  country: {
+    type: String,
+    required: [true, 'A player must have a country'],
+    trim: true,
+  },
   discipline: {
     type: String,
     required: [true, 'A player must have a discipline'],

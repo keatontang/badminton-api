@@ -112,7 +112,7 @@ const scrapeAllPlayers = async (url) => {
 async function f() {
   try {
     let players = await scrapeAllPlayers(
-      'https://bwfbadminton.com/rankings/2/bwf-world-rankings/6/men-s-singles/2020/12/?rows=25&page_no=2'
+      'https://bwfbadminton.com/rankings/2/bwf-world-rankings/6/men-s-singles/2020/12/?rows=25&page_no=1'
     );
     return players;
   } catch (err) {

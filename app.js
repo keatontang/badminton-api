@@ -4,9 +4,12 @@ const morgan = require('morgan');
 const playerRoutes = require('./routes/playerRoutes');
 const viewRoutes = require('./routes/viewRoutes');
 const globalErrorHandler = require('./controllers/errorController');
+const path = require('path');
 
 const app = express();
 
+// Configure pug as our templating engine
+app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'pug');
 
 // Middleware
@@ -24,6 +27,8 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serving static files
+app.use(express.static(path.join(__dirname, 'public')));
 // Test pug templating
 // app.get('/', (req, res) => {
 //   res.status(200).render('navbar-static', {
