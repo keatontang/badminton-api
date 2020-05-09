@@ -3,7 +3,6 @@ const catchAsync = require('./../utils/catchAsync');
 const APIFeatures = require('./../utils/APIFeatures');
 
 exports.getPlayers = catchAsync(async (req, res, next) => {
-  console.log(req.query);
   const features = new APIFeatures(Player.find(), req.query)
     .filter()
     .sort()

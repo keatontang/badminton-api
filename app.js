@@ -5,7 +5,7 @@ const playerRoutes = require('./routes/playerRoutes');
 const viewRoutes = require('./routes/viewRoutes');
 const globalErrorHandler = require('./controllers/errorController');
 const path = require('path');
-
+const compression = require('compression');
 const app = express();
 
 // Configure pug as our templating engine
@@ -20,6 +20,9 @@ if (process.env.NODE_ENV === 'DEVELOPMENT') {
 }
 // Request middleware that parses json
 app.use(express.json());
+
+// Middleware that compresses text sent to the client
+app.use(compression());
 
 // Use middleware that adds to the request the time of request
 app.use((req, res, next) => {
