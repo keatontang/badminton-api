@@ -21,6 +21,7 @@
     "morgan": "^1.10.0",
     "perf_hooks": "0.0.1",
     "prettier": "^2.0.5",
+    "pug": "^2.0.4",
     "puppeteer": "^3.0.2",
     "puppeteer-extra-plugin-adblocker": "^2.11.3",
     "validator": "^13.0.0"
