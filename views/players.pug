@@ -1,0 +1,33 @@
+extends ../_bootstrap
+append styles
+    // Custom styles for this template
+    link(href='../css/overview.css', rel='stylesheet' type='text/css')
+block body
+    // Static navbar
+    +navbar-static("badminton-api","navbar")
+        +nav_item("/") Home
+        +nav_item("/players", "active") Players
+
+    //- +dropdown("Discipline",[
+    //-             {text:"MEN'S SINGLES",href:"yee", url: "ye},
+    //-             {text:"Women's Singles",href:""},
+    //- ])
+    .container
+        +a-btn-info("/players?discipline=MEN'S SINGLES") MS
+        +a-btn-info("/players?discipline=WOMEN'S SINGLES") WS
+        br
+        br
+        +a-btn-info("/players?sort=DOB") Sort by Oldest
+        +a-btn-info("/players?sort=-DOB") Sort by Youngest
+
+
+
+        each player in players
+            .row
+                .col-md-6.col-sm-8.col-xs-12.col-md-offset-3.col-sm-offset-2
+                    .card
+                        .text
+                            +a-btn-info("/players/" + player._id) #{player.rank}
+                            h3 #{player.name}  |  #{player.country}
+                            h5 #{player.discipline.toLowerCase()}
+                            p W #{player.wins} — L #{player.losses}

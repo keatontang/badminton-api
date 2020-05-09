@@ -29,12 +29,6 @@ app.use((req, res, next) => {
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
-// Test pug templating
-// app.get('/', (req, res) => {
-//   res.status(200).render('navbar-static', {
-//     num: [5, 3, 4, 2],
-//   });
-// });
 
 // Mount our routers
 app.use('/', viewRoutes);

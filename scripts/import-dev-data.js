@@ -29,10 +29,11 @@ const players = JSON.parse(
 const importData = async () => {
   try {
     await Player.create(players);
-    console.log('data successfully loaded boy');
+    console.log('Loaded JSON data into database.');
     process.exit();
   } catch (err) {
     console.log(err);
+    return;
   }
 };
 
@@ -41,10 +42,11 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Player.deleteMany();
-    console.log('data successfully deleted boy');
+    console.log('Database cleared.');
     process.exit();
   } catch (err) {
     console.log(err);
+    return;
   }
 };
 
@@ -53,4 +55,3 @@ if (process.argv[2] === '--import') {
 } else if (process.argv[2] === '--delete') {
   deleteData();
 }
-console.log(process.argv);

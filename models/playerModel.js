@@ -25,7 +25,6 @@ const playerSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'A player must have a rank'],
     min: [1, "Ranking can't be higher than 1"],
-    unique: [true, 'Ranking must be unique'],
   },
   wins: {
     type: Number,

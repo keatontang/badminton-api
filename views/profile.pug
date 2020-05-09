@@ -1,0 +1,22 @@
+extends ../_bootstrap
+append styles
+    // Custom styles for this template
+    link(href='../css/overview.css', rel='stylesheet' type='text/css')
+block body
+    // Static navbar
+    +navbar-static("badminton-api","navbar")
+        +nav_item("/") Home
+        +nav_item("/players", "active") Players
+    
+    .container
+        .row
+            .col-md-6.col-sm-8.col-xs-12.col-md-offset-3.col-sm-offset-2
+                .card
+                    .text
+                        +a-btn-info("/players/" + player._id) #{player.rank}
+                        h3 #{player.name}  |  #{player.country}
+                        h5 #{player.discipline.toLowerCase()}
+                        p DOB - #{Date(player.DOB)}
+                        p W #{player.wins} — L #{player.losses}
+                        p Prize Money - #{player.prizeMoney}
+                        p Points - #{player.points}

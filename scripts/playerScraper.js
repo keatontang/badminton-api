@@ -1,35 +1,28 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
-// This function takes as input a player url and will return as output the DOB of the player
-const scrapePlayerDOB = async (url) => {
-  try {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    // Go to page
-    await page.goto(url);
-    await page.content;
-
-    const playerDOB = await page.evaluate(() => {
-      const DOB = document.querySelector(
-        '#container-players-profile > section.playertop > div > div.player-profile-wrap > div.player-profile-data > div.player-extra-wrap > div.player-age > span:nth-child(3)'
-      );
-    });
-
-    await browser.close();
-    return playerDOB;
-  } catch (err) {
-    console.log(err);
-    return;
-  }
-};
-
 // This function takes as input a url and scrapes all the player data from the page and returns an array of objects which contain the player data
 const scrapeAllPlayers = async (url) => {
   try {
+    const start = Date.now();
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
+
+    //Setup request interceptor to stop loading of CSS and images
+    await page.setRequestInterception(true);
+
+    // Intercept requests for images, css, fonts, media, and scripts
+    page.on('request', (request) => {
+      if (
+        request.resourceType() === 'image' ||
+        request.resourceType() === 'stylesheet' ||
+        request.resourceType() === 'font' ||
+        request.resourceType() === 'media' ||
+        request.resourceType() === 'script'
+      )
+        request.abort();
+      else request.continue();
+    });
 
     // Go to page
     await page.goto(url);
@@ -87,10 +80,7 @@ const scrapeAllPlayers = async (url) => {
       });
       playerTable[i].DOB = Date.parse(DOB.split('/').reverse().join('-'));
       Date.parse(DOB.replace(/\//g, '-'));
-      //   playerTable[i].DOB = DOB;
     }
-
-    // console.log(playerTable);
 
     fs.writeFile(
       './../data/player-data.json',
@@ -100,6 +90,11 @@ const scrapeAllPlayers = async (url) => {
         console.log('File saved!');
       }
     );
+
+    const end = Date.now();
+    const time = end - start;
+
+    console.log(`Time taken to execute script: ${time}`);
 
     await browser.close();
     return;
@@ -112,12 +107,17 @@ const scrapeAllPlayers = async (url) => {
 async function f() {
   try {
     let players = await scrapeAllPlayers(
-      'https://bwfbadminton.com/rankings/2/bwf-world-rankings/6/men-s-singles/2020/12/?rows=25&page_no=1'
+      'https://bwfbadminton.com/rankings/2/bwf-world-rankings/6/men-s-singles/2020/12/?rows=25&page_no=2'
     );
     return players;
   } catch (err) {
     console.log(err);
+    return;
   }
 }
 
-f();
+f().then(() => {
+  return;
+});
+
+module.exports = scrapeAllPlayers;

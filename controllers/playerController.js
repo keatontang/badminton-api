@@ -3,6 +3,7 @@ const catchAsync = require('./../utils/catchAsync');
 const APIFeatures = require('./../utils/APIFeatures');
 
 exports.getPlayers = catchAsync(async (req, res, next) => {
+  console.log(req.query);
   const features = new APIFeatures(Player.find(), req.query)
     .filter()
     .sort()
@@ -39,6 +40,22 @@ exports.deletePlayer = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     msg: 'deleted player tho',
+    player: player,
+  });
+});
+
+exports.getPlayer = catchAsync(async (req, res, next) => {
+  const player = await Player.findById(req.params.id);
+
+  if (!player) {
+    return next(
+      new Error(`No such player with ID ${req.params.id} exists`, 404)
+    );
+  }
+
+  res.status(200).json({
+    status: 'success',
+    msg: 'got player',
     player: player,
   });
 });

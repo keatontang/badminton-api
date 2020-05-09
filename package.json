@@ -4,18 +4,23 @@
   "description": "public API for badminton player statistics",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "mocha || true"
   },
   "author": "Keaton Tang",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mocha": "^7.1.2",
     "mongoose": "^5.9.11",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.3",
+    "perf_hooks": "0.0.1",
     "prettier": "^2.0.5",
     "puppeteer": "^3.0.2",
+    "puppeteer-extra-plugin-adblocker": "^2.11.3",
     "validator": "^13.0.0"
   }
 }

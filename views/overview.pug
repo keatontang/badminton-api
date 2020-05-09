@@ -1,35 +1,37 @@
 extends ../_bootstrap
 append styles
 	// Custom styles for this template
-	link(href='../css/navbar-static-top.css', rel='stylesheet')
-	link(href='../css/styles.css', rel='stylesheet' type='text/css')
+	link(href='../css/overview.css', rel='stylesheet' type='text/css')
 block body
 	// Static navbar
-	+navbar-static("Project name","navbar")
-		+nav_item("#","active") Home
-		+nav_item("#") About
-		+nav_item("#") Contact
-		+nav_item_dropdown("#")(label="Dropdown")
-			+nav_item("#") Action
-			+nav_item("#") Another action
-			+nav_item("#") Something else here
-			+nav_divider
-			+nav_item("#") Separated link
-			+nav_item("#") One more separated link
-	.container
-		// Main component for a primary marketing message or call to action
+	+navbar-static("badminton-api","navbar")
+		+nav_item("/","active") Home
+		+nav_item("/players") Players
 
-		each player in players
+
+	.container
+		.wrapper
 			.row
-				.col-md-6.col-sm-8.col-xs-12.col-md-offset-3.col-sm-offset-2
-					.card
-						.image
-						img(src='../images/blue.jpg' width='100%')
-						.text
-							.fab #{player.rank}
-							h3 #{player.name}  |  #{player.country}
-							h5 #{player.discipline.toLowerCase()}
-							p W #{player.wins} — L #{player.losses}
+				.column.ws-column
+					each player in MS
+						.row
+							.col-md-6.col-sm-8.col-xs-12.col-md-offset-3.col-sm-offset-2
+								.card
+									.text
+										+a-btn-info("/players/" + player._id) #{player.rank}
+										h3 #{player.name}  |  #{player.country}
+										h5 #{player.discipline.toLowerCase()}
+										p W #{player.wins} — L #{player.losses}					
+				.column.ms-column
+					each player in WS
+						.row
+							.col-md-6.col-sm-8.col-xs-12.col-md-offset-3.col-sm-offset-2
+								.card
+									.text
+										+a-btn-info("/players/" + player._id) #{player.rank}
+										h3 #{player.name}  |  #{player.country}
+										h5 #{player.discipline.toLowerCase()}
+										p W #{player.wins} — L #{player.losses}
 
 							
 
