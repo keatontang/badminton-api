@@ -11,7 +11,7 @@ exports.getPlayers = catchAsync(async (req, res, next) => {
   const players = await features.query;
   res.status(200).json({
     status: 'success',
-    msg: 'got da players tho',
+    msg: 'got players',
     length: players.length,
     players: players,
   });
@@ -22,7 +22,7 @@ exports.createPlayer = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    msg: 'created player tho',
+    msg: 'created player',
     player: newPlayer,
   });
 });
@@ -38,7 +38,7 @@ exports.deletePlayer = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    msg: 'deleted player tho',
+    msg: 'deleted player',
     player: player,
   });
 });
@@ -55,6 +55,25 @@ exports.getPlayer = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     msg: 'got player',
+    player: player,
+  });
+});
+
+exports.updatePlayer = catchAsync(async (req, res, next) => {
+  const player = await Player.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!player) {
+    return next(
+      new Error(`No such player with ID ${req.params.id} exists`, 404)
+    );
+  }
+
+  res.status(200).json({
+    status: 'success',
+    msg: 'updated player',
     player: player,
   });
 });

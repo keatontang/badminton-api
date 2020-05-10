@@ -33,11 +33,14 @@ const scrapeAllPlayers = async (url) => {
       let playerArray = [];
 
       // Create 25 player objects and append to the playerArray
+      const allChildren = document.querySelector(
+        '#rankings_landing_container > div > div.page-content.page-content--no-padding > div.wrapper-content-results.rankings_wrapper-content-results > div > div > table > tbody'
+      );
       for (i = 0; i < 49; i += 2) {
-        const child = document.querySelector(
-          '#rankings_landing_container > div > div.page-content.page-content--no-padding > div.wrapper-content-results.rankings_wrapper-content-results > div > div > table > tbody'
-        ).children[i];
-
+        // const child = document.querySelector(
+        //   '#rankings_landing_container > div > div.page-content.page-content--no-padding > div.wrapper-content-results.rankings_wrapper-content-results > div > div > table > tbody'
+        // ).children[i];
+        const child = allChildren.children[i];
         let playerJSON = new Object();
 
         playerJSON.rank = parseInt(child.children[0].innerText);

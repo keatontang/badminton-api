@@ -54,6 +54,21 @@ const playerSchema = new mongoose.Schema({
   },
 });
 
+// Query middleware that checks if fields that shouldn't be changed are changed
+
+playerSchema.pre('findOneAndUpdate', function (next) {
+  const update = this._update;
+  if (update.name || update.country || update.DOB || update.discipline) {
+    next(
+      new Error(
+        `Can't update the name, country, DOB, or discipline of a player`,
+        404
+      )
+    );
+  }
+  next();
+});
+
 const Player = mongoose.model('Player', playerSchema);
 
 module.exports = Player;

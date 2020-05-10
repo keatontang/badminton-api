@@ -11,6 +11,7 @@ router.route('/').post(playerController.createPlayer);
 router
   .route('/:id')
   .delete(playerController.deletePlayer)
-  .get(playerController.getPlayer);
+  .get(playerController.getPlayer)
+  .patch(playerController.updatePlayer);
 
 module.exports = router;
