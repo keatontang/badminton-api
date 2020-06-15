@@ -9,3 +9,8 @@ Hosted on Heroku + database hosted on mongoDB Atlas
 Data generated from web-scraping Puppeteer scripts
 
 Front-end is SSR HTML/CSS/JS using Pug for the templating engine
+
+# Credits
+
+- [Puppeteer](https://github.com/puppeteer/puppeteer)
+- [BWF Rankings](https://bwfbadminton.com/rankings/)
