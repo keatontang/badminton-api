@@ -2,7 +2,7 @@
 
 Send requests to my endpoints to get stats (ranking, playerpoints, etc.) on your favourite badminton players
 
-[API Documentation](https://documenter.getpostman.com/view/11179943/SzmfYxPA?version=latest)
+[API Documentation](https://documenter.getpostman.com/view/11179943/SzmfYxPA)
 
 Hosted on Heroku + database hosted on mongoDB Atlas
 
